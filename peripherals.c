@@ -11,7 +11,7 @@
  **************************************************************************************************/
 
 /*Application Specific Code*/
-#include "em_device.h
+
 #include "em_chip.h"
 #include "em_timer.h"
 #include "em_gpio.h"
@@ -179,9 +179,8 @@ void GPIOHandler(void)
  *****************************************************************************/
 static uint8_t desiredDutyCycle;
 
-
-
-void InitPWM1()
+#if 0
+void initTimer(void)
 {
 
 	  GPIO_PinModeSet(gpioPortA, 6, gpioModePushPull, 0);
@@ -215,7 +214,7 @@ void InitPWM1()
 	  TIMER_Enable(TIMER0, true);
 
 	  // Trigger DMA on compare event to set CCVB to update duty cycle on next period
-	  TIMER_IntEnable(TIMER0, TIMER_IF_CC0);
+	 // TIMER_IntEnable(TIMER0, TIMER_IF_CC0);
 
 	PWMObj.all=0;
 	PWMObj.bits.Enabled=1;
@@ -273,6 +272,67 @@ void populateBuffer(void)
     buffer[i] = (uint16_t) (TIMER_TopGet(TIMER0) * dutyCyclePercentages[i] / 100);
   }
 }
+#endif
+
+void InitPWM1()
+{
+
+		  // Enable clock to GPIO and TIMER0
+		  CMU_ClockEnable(cmuClock_GPIO, true);
+		  CMU_ClockEnable(cmuClock_TIMER1, true);
+
+
+	// $[TIMER1 I/O setup]
+	/* Set up CC0 */
+		  // Route TIMER1 CC0 output to PA6
+		  GPIO->TIMERROUTE[1].ROUTEEN  = GPIO_TIMER_ROUTEEN_CC0PEN;
+		  GPIO->TIMERROUTE[1].CC0ROUTE = (PWM_PORT << _GPIO_TIMER_CC0ROUTE_PORT_SHIFT)
+		                    | (PWM_PIN << _GPIO_TIMER_CC0ROUTE_PIN_SHIFT);
+
+	TIMER_Init_TypeDef init = TIMER_INIT_DEFAULT;
+
+	init.enable = 0;
+	init.debugRun = 1;
+	init.dmaClrAct = 0;
+	init.sync = 0;
+	init.clkSel = timerClkSelHFPerClk;
+	init.prescale = timerPrescale1;
+	init.fallAction = timerInputActionNone;
+	init.riseAction = timerInputActionNone;
+	init.mode = timerModeUp;
+	init.quadModeX4 = 0;
+	init.oneShot = 0;
+	init.count2x = 0;
+	init.ati = 0;
+	TIMER_Init(TIMER1, &init);
+	// [TIMER1 initialization]$
+
+	// $[TIMER1 CC0 init]
+	TIMER_InitCC_TypeDef initCC0 = TIMER_INITCC_DEFAULT;
+
+	initCC0.prsInput = false;
+	initCC0.prsSel = timerPRSSELCh0;
+	initCC0.edge = timerEdgeRising;
+	initCC0.mode = timerCCModePWM;
+	initCC0.eventCtrl = timerEventEveryEdge;
+	initCC0.filter = 0;
+	initCC0.cofoa = timerOutputActionNone;
+	initCC0.cufoa = timerOutputActionNone;
+	initCC0.cmoa = timerOutputActionNone;
+	initCC0.coist = 0;
+	initCC0.outInvert = 0;
+	TIMER_InitCC(TIMER1, 0, &initCC0);
+	// [TIMER1 CC0 init]$0
+
+	//PWM Output - PIN P7 on WSTK
+
+	GPIO_PinModeSet(PWM_PORT, PWM_PIN, gpioModePushPull, 0);
+
+	PWMObj.all=0;
+	PWMObj.bits.Enabled=1;
+
+}
+
 
 void UpdatePWM1(uint8_t DutyCycle) //desiredDutyCycle varies from 0-100;
 {
@@ -536,9 +596,11 @@ void InitPeripherals()
 
 		InitGPIO();
 	    InitPWM1();
+	    UpdatePWM1(70);
+	    ChangePWMoutput();
 	    // Initialize DMA only after buffer is populated
-	    populateBuffer();
-	    initLdma();
+	   // populateBuffer();
+	    //initLdma();
 
 	    while (1) {
 	      EMU_EnterEM1(); // Enter EM1 (won't exit)

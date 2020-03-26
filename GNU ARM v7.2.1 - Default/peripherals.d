@@ -1,5 +1,5 @@
-platform/emlib/src/em_adc.o: ../platform/emlib/src/em_adc.c \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_adc.h \
+peripherals.o: ../peripherals.c \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_chip.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/em_device.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22a224f512im40.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/CMSIS/Include/core_cm33.h \
@@ -55,9 +55,37 @@ platform/emlib/src/em_adc.o: ../platform/emlib/src/em_adc.c \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_devinfo.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_prs_signals.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_dma_descriptor.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_ldmaxbar_defines.h
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_ldmaxbar_defines.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_system.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_bus.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_assert.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_cmu.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_emu.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hal-config.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/board_features.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/ble-configuration.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/EFR32MG22_BRD4182A/config/hal-config-board.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/halconfig/inc/hal-config/hal-config-types.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hal-config-app-common.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h \
+ ../peripherals.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_usart.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_ldma.h \
+ ../hal-config.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h
 
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_adc.h:
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_chip.h:
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/em_device.h:
 
@@ -170,3 +198,59 @@ platform/emlib/src/em_adc.o: ../platform/emlib/src/em_adc.c \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_dma_descriptor.h:
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/Device/SiliconLabs/EFR32MG22/Include/efr32mg22_ldmaxbar_defines.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_system.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_bus.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_assert.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_cmu.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_emu.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hal-config.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/board_features.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/ble-configuration.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/EFR32MG22_BRD4182A/config/hal-config-board.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/halconfig/inc/hal-config/hal-config-types.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hal-config-app-common.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h:
+
+../peripherals.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_usart.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_ldma.h:
+
+../hal-config.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h:
