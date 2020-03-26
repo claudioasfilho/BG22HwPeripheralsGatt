@@ -22,6 +22,10 @@
 #include "hal-config-board.h"
 #include "hal-config-app-common.h"
 
+
+#define PWM_PIN                               (6U)
+#define PWM_PORT                              (gpioPortA)
+
 #ifndef HAL_VCOM_ENABLE
 #define HAL_VCOM_ENABLE                   (1)
 #endif
