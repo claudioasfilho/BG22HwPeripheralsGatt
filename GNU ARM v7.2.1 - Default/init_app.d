@@ -72,18 +72,7 @@ init_app.o: ../init_app.c \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/i2cspm.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/i2cspmhalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_i2c.h \
- ../pti.h ../peripherals.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_cmu.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h \
- /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h
+ ../pti.h
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h:
 
@@ -232,27 +221,3 @@ init_app.o: ../init_app.c \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_i2c.h:
 
 ../pti.h:
-
-../peripherals.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_cmu.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/soc/native_gecko.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/gecko_configuration.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_gattdb_def.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_types.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/protocol/bluetooth/ble_stack/inc/common/bg_errorcodes.h:
-
-/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h:

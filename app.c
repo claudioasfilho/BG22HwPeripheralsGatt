@@ -25,6 +25,7 @@
 #include "gatt_db.h"
 
 #include "app.h"
+#include "peripherals.h"
 
 /* Print boot message */
 static void bootMessage(struct gecko_msg_system_boot_evt_t *bootevt);
@@ -67,6 +68,7 @@ void appMain(gecko_configuration_t *pconfig)
 
         bootMessage(&(evt->data.evt_system_boot));
         printLog("boot event - starting advertising\r\n");
+        GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
 
         /* Set advertising parameters. 100ms advertisement interval.
          * The first parameter is advertising set handle
@@ -79,15 +81,133 @@ void appMain(gecko_configuration_t *pconfig)
         gecko_cmd_le_gap_start_advertising(0, le_gap_general_discoverable, le_gap_connectable_scannable);
         break;
 
+
+      case gecko_evt_system_external_signal_id:
+
+            if (evt->data.evt_system_external_signal.extsignals == IADC_IRQFlag)
+            {
+
+          	  //Toggle LED1 just for timing purposes
+          	 // GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+          	  softIADC_IRQHandler();
+            }
+
+            break;
+
+      case gecko_evt_hardware_soft_timer_id:
+
+			  if (evt->data.evt_hardware_soft_timer.handle== 255) //Scheduler
+			  {
+				  static int local_time = 0;
+
+
+				 // StartADC0Sample();
+				  uint8_t temp;
+				      	  		  //temp = GetPB0();
+
+				      	  		if(GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN)==0) temp=1;
+				      	  		else temp=0;
+
+				  printLog("Softtimer %ds Pb0 = %d \r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN));
+				  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+				  PWMHandler();
+				  GPIOHandler();
+			  }
+
+
+
+          	  break;
+
+      case gecko_evt_gatt_server_user_read_request_id:
+
+    	  switch (evt->data.evt_gatt_server_user_read_request.characteristic)
+		  {
+    	  	  case gattdb_xgatt_gpio_pb0:
+    	  	  {
+    	  		  uint8_t temp;
+    	  		  //temp = GetPB0();
+
+    	  		if(GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN)==0) temp=1;
+    	  		else temp=0;
+    	  		  gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_pb0,0,1, &temp);
+    	  	  }
+    		  break;
+
+    	  	  case gattdb_xgatt_gpio_pb1:
+			  {
+              	  uint8_t temp;
+              	  temp = GetPB1();
+                    gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_pb1,0,1, &temp);
+                }
+			  break;
+
+    	  	  case gattdb_xgatt_gpio_led0:
+			  {
+				  uint8_t temp;
+				  temp = GetLED0();
+				  gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_led0,0,1, &temp);
+				}
+			  break;
+
+    	  	  case gattdb_xgatt_gpio_led1:
+			  {
+					uint8_t temp;
+					temp = GetLED1();
+					gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_led1,0,1, &temp);
+			  }
+			  break;
+
+    	  	  case gattdb_xgatt_gpio_PWM1:
+			  {
+				  uint8_t temp;
+				  temp = GetPWM1();
+				  gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_PWM1,0,1, &temp);
+			  }
+			  break;
+
+    	  	  case gattdb_xgatt_gpio_ADC0:
+			  {
+				  //StartADC0Sample();
+				  gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_ADC0,0,2, (uint8_t *)GetADC0());
+			  }
+			  break;
+#if 0
+    	  	  case :
+			  {
+
+			  }
+			  break;
+
+    	  	  case :
+			  {
+
+			  }
+			  break;
+
+    	  	  case :
+			  {
+
+			  }
+			  break;
+#endif
+
+		  }
+
+	  break; //case gecko_evt_gatt_server_user_read_request_id:
+
       case gecko_evt_le_connection_opened_id:
 
         printLog("connection opened\r\n");
+
+        //It starts the Soft Timer for the Scheduller (Handle 255)
+        gecko_cmd_hardware_set_soft_timer(32768,255,0);
 
         break;
 
       case gecko_evt_le_connection_closed_id:
 
         printLog("connection closed, reason: 0x%2.2x\r\n", evt->data.evt_le_connection_closed.reason);
+        gecko_cmd_hardware_set_soft_timer(0,255,0);
 
         /* Check if need to boot to OTA DFU mode */
         if (boot_to_dfu) {

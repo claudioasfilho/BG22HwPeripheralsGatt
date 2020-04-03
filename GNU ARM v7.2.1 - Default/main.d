@@ -79,7 +79,9 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
  ../hal-config.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h \
- ../app.h
+ ../app.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h
 
 ../init_mcu.h:
 
@@ -250,3 +252,7 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h:
 
 ../app.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h:

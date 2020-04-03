@@ -26,6 +26,7 @@
 #include "bsp.h"
 #include "i2cspm.h"
 #include "pti.h"
+#include "peripherals.h"
 
 void initApp(void)
 {
@@ -47,4 +48,9 @@ void initApp(void)
   //Enable I2C sensor and display if requested
   GPIO_PinModeSet(BSP_I2CSENSOR_ENABLE_PORT, BSP_I2CSENSOR_ENABLE_PIN, gpioModePushPull, DISPLAY_SENSOR_COMMON_ENABLE);
 #endif
+
+  InitPeripherals();
+
+
+
 }

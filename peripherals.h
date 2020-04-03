@@ -92,6 +92,11 @@ typedef union
 
 extern uint8_t UARTbuffer[UARTBUFFERSIZE];
 
+enum {
+		IADC_IRQFlag,
+
+}softIRQ;
+
 /*******************************************************************************
  *******************************   DEFINES   ***********************************
  ******************************************************************************/
@@ -188,7 +193,9 @@ void InitLETIMER0(void);
 /*ADC0*/
 
 void InitADC0(void);
-uint32_t GetADC0();
+void StartADC0Sample();
+uint16_t GetADC0();
+void softIADC_IRQHandler(void);
 
 void InitPeripherals();
 
