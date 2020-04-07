@@ -76,7 +76,10 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_cmu.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_gpio.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h \
- ../hal-config.h \
+ ../hal-config.h ../peripherals.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_usart.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h \
  ../app.h \
@@ -246,6 +249,14 @@ main.o: ../main.c ../init_mcu.h ../board_features.h \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_common.h:
 
 ../hal-config.h:
+
+../peripherals.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_timer.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_usart.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h:
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h:
 

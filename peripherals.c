@@ -400,9 +400,37 @@ uint16_t GetADC0()
 	return ADCresult.data;
 }
 
+void Test_GPIO()
+{
+    /* Enable GPIO clock */
+      CMU_ClockEnable(cmuClock_GPIO, true);
+
+      /* Configure Push Button 0 as input*/
+      GPIO_PinModeSet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN, gpioModeInput, 0);
+
+      /* Configure LED0 as a push pull for LED drive */
+      GPIO_PinModeSet(BSP_LED0_PORT, BSP_LED0_PIN, gpioModePushPull, 1);
+
+      while (1)
+      {
+        /* Check if button is pressed - when pressed, value will be 0 */
+        if (!GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN))
+        {
+          GPIO_PinOutSet(BSP_LED0_PORT, BSP_LED0_PIN);
+        }
+        else
+        {
+          GPIO_PinOutClear(BSP_LED0_PORT, BSP_LED0_PIN);
+        }
+      }
+}
+
+
 
 void InitPeripherals()
 {
+
+#if 1
 	  // Initialize the IADC
 	    initIADC();
 
@@ -413,11 +441,12 @@ void InitPeripherals()
 	    InitPWM1();
 	    UpdatePWM1(70);
 	    ChangePWMoutput();
+	    /* Enable GPIO clock */
 
-#if 0
-	    while (1) {
-	      EMU_EnterEM1(); // Enter EM1 (won't exit)
-	    }
+
+#else
+
+	    Test_GPIO();
 #endif
 
 }

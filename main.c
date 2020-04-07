@@ -37,6 +37,7 @@
 
 /* Device initialization header */
 #include "hal-config.h"
+#include "peripherals.h"
 
 #if defined(HAL_CONFIG)
 #include "bsphalconfig.h"
@@ -99,6 +100,7 @@ static gecko_configuration_t config = {
   .rf.antenna = GECKO_RF_ANTENNA,                      /* Select antenna path! */
 };
 
+
 /**
  * @brief  Main function
  */
@@ -106,13 +108,14 @@ int main(void)
 {
   /* Initialize device */
   initMcu();
-  /* Initialize board */
-  initBoard();
-  /* Initialize application */
+ /* Initialize board */
+  initBoard();  /* Initialize application */
   initApp();
   initVcomEnable();
+
   /* Start application */
   appMain(&config);
+
 }
 
 /** @} (end addtogroup app) */

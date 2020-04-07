@@ -46,6 +46,8 @@ void appMain(gecko_configuration_t *pconfig)
   /* Initialize stack */
   gecko_init(pconfig);
 
+  InitPeripherals();
+
   while (1) {
     /* Event pointer for handling events */
     struct gecko_cmd_packet* evt;
@@ -108,7 +110,7 @@ void appMain(gecko_configuration_t *pconfig)
 				      	  		if(GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN)==0) temp=1;
 				      	  		else temp=0;
 
-				  printLog("Softtimer %ds Pb0 = %d \r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN));
+				  printLog("Softtimer %ds Pb0 = %d Pb1 = %d\r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN), GPIO_PinInGet(BSP_BUTTON1_PORT, BSP_BUTTON1_PIN));
 				  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
 				  PWMHandler();
 				  GPIOHandler();
@@ -219,6 +221,85 @@ void appMain(gecko_configuration_t *pconfig)
         }
         break;
 
+
+      case gecko_evt_gatt_server_user_write_request_id:
+
+                if (evt->data.evt_gatt_server_user_write_request.characteristic==gattdb_xgatt_gpio_led0)
+        		  {
+
+
+        				if (evt->data.evt_gatt_server_attribute_value.value.data[0]==0)
+        				{
+        					ClearLED0();
+
+        				}
+        				else
+        				{
+        					SetLED0();
+
+        				}
+
+        				//Response Back to the BLE client saying the data was received
+        				gecko_cmd_gatt_server_send_user_write_response( evt->data.evt_gatt_server_user_write_request.connection,gattdb_xgatt_gpio_led0,bg_err_success);
+
+
+        		  }
+
+                if (evt->data.evt_gatt_server_user_write_request.characteristic==gattdb_xgatt_gpio_led1)
+                {
+
+
+                	if (evt->data.evt_gatt_server_attribute_value.value.data[0]==0)           		{
+              			ClearLED1();
+
+              		}
+                  	else
+              		{
+              			SetLED1();
+
+              		}
+
+
+                	//Response Back to the BLE client saying the data was received
+                	gecko_cmd_gatt_server_send_user_write_response( evt->data.evt_gatt_server_user_write_request.connection,gattdb_xgatt_gpio_led1,bg_err_success);
+
+                }
+
+
+              if (evt->data.evt_gatt_server_user_write_request.characteristic==gattdb_xgatt_gpio_PWM1)
+              {
+
+
+              	UpdatePWM1(evt->data.evt_gatt_server_attribute_value.value.data[0]);
+
+              	//Response Back to the BLE client saying the data was received
+              	gecko_cmd_gatt_server_send_user_write_response( evt->data.evt_gatt_server_user_write_request.connection,gattdb_xgatt_gpio_PWM1,bg_err_success);
+
+              }
+
+
+
+      		/* Events related to OTA upgrading
+      		----------------------------------------------------------------------------- */
+
+      		/* Check if the user-type OTA Control Characteristic was written.
+      		* If ota_control was written, boot the device into Device Firmware Upgrade (DFU) mode. */
+
+              if (evt->data.evt_gatt_server_user_write_request.characteristic == gattdb_ota_control) {
+                       /* Set flag to enter to OTA mode */
+                       boot_to_dfu = 1;
+                       /* Send response to Write Request */
+                       gecko_cmd_gatt_server_send_user_write_response(
+                         evt->data.evt_gatt_server_user_write_request.connection,
+                         gattdb_ota_control,
+                         bg_err_success);
+
+                       /* Close connection to enter to DFU OTA mode */
+                       gecko_cmd_le_connection_close(evt->data.evt_gatt_server_user_write_request.connection);
+              }
+
+            break;		// gecko_evt_gatt_server_user_write_request_id:
+#if 0
       /* Events related to OTA upgrading
          ----------------------------------------------------------------------------- */
 
@@ -239,7 +320,7 @@ void appMain(gecko_configuration_t *pconfig)
           gecko_cmd_le_connection_close(evt->data.evt_gatt_server_user_write_request.connection);
         }
         break;
-
+#endif
       /* Add additional event handlers as your application requires */
 
       default:

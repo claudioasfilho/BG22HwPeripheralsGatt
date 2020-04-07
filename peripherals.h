@@ -199,5 +199,8 @@ void softIADC_IRQHandler(void);
 
 void InitPeripherals();
 
+
+void Test_GPIO();
+
 #endif /* PERIPHERALS_H_ */
 
