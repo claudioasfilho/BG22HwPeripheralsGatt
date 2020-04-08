@@ -164,7 +164,7 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 	</storageModule>
-	<storageModule generalProj.esf.protocolIds="com.silabs.sdk.stack.super:2.7.3._1914562654.com.silabs.stack.ble:2.13.3.0_-1800678402" generalProj.esf.protocolNames="ble" moduleId="com.silabs.ss.framework.ide.project.core.cpp" project.generation="5" projectCommon.boardIds="brd4182a:0.0.0.B02" projectCommon.importModeId="LINK_LIBRARIES" projectCommon.partId="mcu.arm.efr32.mg22.efr32mg22a224f512im40" projectCommon.sdkId="com.silabs.sdk.stack.super:2.7.3._1914562654"/>
+	<storageModule generalProj.esf.protocolIds="com.silabs.sdk.stack.super:2.7.3._1914562654.com.silabs.stack.ble:2.13.3.0_-1800678402" generalProj.esf.protocolNames="ble" moduleId="com.silabs.ss.framework.ide.project.core.cpp" project.generation="36" projectCommon.boardIds="brd4182a:0.0.0.B02" projectCommon.importModeId="LINK_LIBRARIES" projectCommon.partId="mcu.arm.efr32.mg22.efr32mg22a224f512im40" projectCommon.sdkId="com.silabs.sdk.stack.super:2.7.3._1914562654"/>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="BG22HwPeripheralsGatt.com.silabs.ss.framework.ide.project.core.cdt.cdtMbsProjectType.1873363794" name="SLS CDT Project" projectType="com.silabs.ss.framework.ide.project.core.cdt.cdtMbsProjectType"/>
 	</storageModule>

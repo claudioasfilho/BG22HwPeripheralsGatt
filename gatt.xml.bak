@@ -9,7 +9,7 @@
     <!--Device Name-->
     <characteristic id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
       <informativeText/>
-      <value length="13" type="utf-8" variable_length="false">EmptywHW</value>
+      <value length="15" type="utf-8" variable_length="false">xG22GattExample</value>
       <properties read="true" read_requirement="optional" write="true" write_requirement="optional"/>
     </characteristic>
     
@@ -103,7 +103,7 @@
     <characteristic id="xgatt_gpio_ADC0" name="ADC0" sourceId="org.bluetooth.characteristic.gatt.service_changed" uuid="b1eec91a-1951-11e7-93ae-92361f002671">
       <description>ADC0</description>
       <informativeText/>
-      <value length="4" type="user" variable_length="false"/>
+      <value length="2" type="user" variable_length="false"/>
       <properties read="true" read_requirement="optional"/>
     </characteristic>
   </service>

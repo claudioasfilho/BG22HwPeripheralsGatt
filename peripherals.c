@@ -337,11 +337,12 @@ void initIADC (void)
   // Single initialization
   initSingle.dataValidLevel = _IADC_SINGLEFIFOCFG_DVL_VALID1;
 
-  // Set conversions to run continuously
-  initSingle.triggerAction = iadcTriggerActionOnce;//iadcTriggerActionContinuous;
+  // Set conversions to run once
+  initSingle.triggerAction = iadcTriggerActionOnce;
 
-  // Configure Input sources for single ended conversion
-  initSingleInput.posInput = iadcPosInputPortCPin4;
+  // Configure Input sources for single ended conversion GPIO port C pin 2
+
+  initSingleInput.posInput = iadcPosInputPortCPin2;
   initSingleInput.negInput = iadcNegInputGnd;
 
   // Initialize IADC
@@ -353,12 +354,15 @@ void initIADC (void)
   // Allocate the analog bus for ADC0 inputs
   GPIO->IADC_INPUT_BUS |= IADC_INPUT_BUSALLOC;
 
+#if ADCINTENABLED
   // Enable interrupts on data valid level
   IADC_enableInt(IADC0, IADC_IF_SINGLEFIFODVL);
 
   // Enable ADC interrupts
   NVIC_ClearPendingIRQ(IADC_IRQn);
   NVIC_EnableIRQ(IADC_IRQn);
+
+#endif
 
   ADCObj.bits.ADCSample=0;
 }
@@ -388,6 +392,10 @@ void softIADC_IRQHandler(void)
 
 }
 
+void ADCSampleReady()
+{
+	ADCObj.bits.ADCSample=1;
+}
 
 void StartADC0Sample()
 {
@@ -397,6 +405,8 @@ void StartADC0Sample()
 uint16_t GetADC0()
 {
 	ADCObj.bits.ADCSample=0;
+
+	ADCresult = IADC_pullSingleFifoResult(IADC0);
 	return ADCresult.data;
 }
 
@@ -433,9 +443,8 @@ void InitPeripherals()
 #if 1
 	  // Initialize the IADC
 	    initIADC();
-
 	    // Start single
-	   // StartADC0Sample();
+	    StartADC0Sample();
 
 		InitGPIO();
 	    InitPWM1();

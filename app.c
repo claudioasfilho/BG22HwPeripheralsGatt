@@ -70,14 +70,15 @@ void appMain(gecko_configuration_t *pconfig)
 
         bootMessage(&(evt->data.evt_system_boot));
         printLog("boot event - starting advertising\r\n");
-        GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+
+
 
         /* Set advertising parameters. 100ms advertisement interval.
          * The first parameter is advertising set handle
          * The next two parameters are minimum and maximum advertising interval, both in
          * units of (milliseconds * 1.6).
          * The last two parameters are duration and maxevents left as default. */
-        gecko_cmd_le_gap_set_advertise_timing(0, 160, 160, 0, 0);
+        gecko_cmd_le_gap_set_advertise_timing(0, 3200, 3200, 0, 0);
 
         /* Start general advertising and enable connections. */
         gecko_cmd_le_gap_start_advertising(0, le_gap_general_discoverable, le_gap_connectable_scannable);
@@ -103,7 +104,12 @@ void appMain(gecko_configuration_t *pconfig)
 				  static int local_time = 0;
 
 
-				 // StartADC0Sample();
+				  StartADC0Sample();
+
+				  if((IADC0->STATUS & (_IADC_STATUS_CONVERTING_MASK | _IADC_STATUS_SINGLEFIFODV_MASK)) == IADC_STATUS_SINGLEFIFODV)
+				  {
+					  ADCSampleReady();
+				  }
 				  uint8_t temp;
 				      	  		  //temp = GetPB0();
 
@@ -111,9 +117,10 @@ void appMain(gecko_configuration_t *pconfig)
 				      	  		else temp=0;
 
 				  printLog("Softtimer %ds Pb0 = %d Pb1 = %d\r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN), GPIO_PinInGet(BSP_BUTTON1_PORT, BSP_BUTTON1_PIN));
-				  GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+				  //GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
 				  PWMHandler();
 				  GPIOHandler();
+				  //StartADC0Sample();
 			  }
 
 
@@ -173,25 +180,6 @@ void appMain(gecko_configuration_t *pconfig)
 				  gecko_cmd_gatt_server_send_user_read_response(evt->data.evt_gatt_server_user_read_request.connection,gattdb_xgatt_gpio_ADC0,0,2, (uint8_t *)GetADC0());
 			  }
 			  break;
-#if 0
-    	  	  case :
-			  {
-
-			  }
-			  break;
-
-    	  	  case :
-			  {
-
-			  }
-			  break;
-
-    	  	  case :
-			  {
-
-			  }
-			  break;
-#endif
 
 		  }
 
@@ -204,7 +192,8 @@ void appMain(gecko_configuration_t *pconfig)
         //It starts the Soft Timer for the Scheduller (Handle 255)
         gecko_cmd_hardware_set_soft_timer(32768,255,0);
 
-        break;
+
+        break; //gecko_evt_le_connection_opened_id:
 
       case gecko_evt_le_connection_closed_id:
 
@@ -219,7 +208,7 @@ void appMain(gecko_configuration_t *pconfig)
           /* Restart advertising after client has disconnected */
           gecko_cmd_le_gap_start_advertising(0, le_gap_general_discoverable, le_gap_connectable_scannable);
         }
-        break;
+        break; //gecko_evt_le_connection_closed_id:
 
 
       case gecko_evt_gatt_server_user_write_request_id:
@@ -299,29 +288,6 @@ void appMain(gecko_configuration_t *pconfig)
               }
 
             break;		// gecko_evt_gatt_server_user_write_request_id:
-#if 0
-      /* Events related to OTA upgrading
-         ----------------------------------------------------------------------------- */
-
-      /* Check if the user-type OTA Control Characteristic was written.
-       * If ota_control was written, boot the device into Device Firmware Upgrade (DFU) mode. */
-      case gecko_evt_gatt_server_user_write_request_id:
-
-        if (evt->data.evt_gatt_server_user_write_request.characteristic == gattdb_ota_control) {
-          /* Set flag to enter to OTA mode */
-          boot_to_dfu = 1;
-          /* Send response to Write Request */
-          gecko_cmd_gatt_server_send_user_write_response(
-            evt->data.evt_gatt_server_user_write_request.connection,
-            gattdb_ota_control,
-            bg_err_success);
-
-          /* Close connection to enter to DFU OTA mode */
-          gecko_cmd_le_connection_close(evt->data.evt_gatt_server_user_write_request.connection);
-        }
-        break;
-#endif
-      /* Add additional event handlers as your application requires */
 
       default:
         break;

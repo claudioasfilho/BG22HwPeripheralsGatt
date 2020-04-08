@@ -117,7 +117,7 @@ static const uint16_t dutyCyclePercentages[BUFFER_SIZE] =
 
 // Buffer of duty cycle values for DMA transfer to CCVB
 // Buffer is populated after TIMER is initialized and Top value is set
-static uint16_t buffer[BUFFER_SIZE];
+//static uint16_t buffer[BUFFER_SIZE];
 
 
 /*******************************************************************************
@@ -196,6 +196,7 @@ void InitADC0(void);
 void StartADC0Sample();
 uint16_t GetADC0();
 void softIADC_IRQHandler(void);
+void ADCSampleReady();
 
 void InitPeripherals();
 

@@ -34,7 +34,7 @@ appPlugin: stack_bridge=false
     <informativeText>Abstract: The generic_access service contains generic information about the device. All available Characteristics are readonly. </informativeText>
     <characteristic id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
       <informativeText/>
-      <value length="13" type="utf-8" variable_length="false">EmptywHW</value>
+      <value length="15" type="utf-8" variable_length="false">xG22GattExample</value>
       <properties read="true" read_requirement="optional" write="true" write_requirement="optional"/>
     </characteristic>
     <characteristic name="Appearance" sourceId="org.bluetooth.characteristic.gap.appearance" uuid="2A01">
@@ -91,12 +91,6 @@ appPlugin: stack_bridge=false
       <description>PWM1</description>
       <informativeText/>
       <value length="1" type="user" variable_length="false"/>
-      <properties read="true" read_requirement="optional" write="true" write_requirement="optional"/>
-    </characteristic>
-    <characteristic id="xgatt_gpio_uart" name="UART Buffer" sourceId="" uuid="de2b52b9-a94d-4c5b-a810-c2deee74aeed">
-      <description>UART Buffer</description>
-      <informativeText/>
-      <value length="64" type="user" variable_length="false"/>
       <properties read="true" read_requirement="optional" write="true" write_requirement="optional"/>
     </characteristic>
     <characteristic id="xgatt_gpio_ADC0" name="ADC0" sourceId="org.bluetooth.characteristic.gatt.service_changed" uuid="b1eec91a-1951-11e7-93ae-92361f002671">

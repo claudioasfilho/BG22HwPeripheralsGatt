@@ -22,8 +22,7 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_xgatt_gpio_led0                 29
 #define gattdb_xgatt_gpio_led1                 32
 #define gattdb_xgatt_gpio_PWM1                 35
-#define gattdb_xgatt_gpio_uart                 38
-#define gattdb_xgatt_gpio_ADC0                 41
-#define gattdb_ota_control                     45
+#define gattdb_xgatt_gpio_ADC0                 38
+#define gattdb_ota_control                     42
 
 #endif
