@@ -61,14 +61,8 @@ void InitGPIO(void) {
 
 	/*PWM Function Related GPIOs*/
 
-	//PWM Output - PIN P9 and EXP_HEADER12 on WSTK with BRD4182 Radio Board
+	//PWM Output - PIN P1 and EXP_HEADER4 on WSTK with BRD4182 Radio Board
 	GPIO_PinModeSet(PWM_PORT, PWM_PIN, gpioModePushPull, 0);
-
-	/*ADC Function Related GPIOs*/
-
-	//ADC Input - PIN P11 and EXP_HEADER14 on WSTK with BRD4182 Radio Board - PD12
-
-	//GPIO_PinModeSet(gpioPortA, 6, gpioModeInput, 0);
 
 	/*General Purpose Function Related GPIOs*/
 
@@ -238,7 +232,7 @@ void UpdatePWM1(uint8_t DutyCycle) //desiredDutyCycle varies from 0-100;
 {
 	desiredDutyCycle = DutyCycle;
 
-	if (DutyCycle == 0)
+	if (DutyCycle == 0) //If Duty Cycle is 0 then device can go to EM2 otherwise it disables EM2
 	{
 		SLEEP_SleepBlockEnd(sleepEM2);
 	}
@@ -362,7 +356,7 @@ void initIADC (void)
   // Allocate the analog bus for ADC0 inputs
   GPIO->IADC_INPUT_BUS |= IADC_INPUT_BUSALLOC;
 
-#if ADCINTENABLED
+#if ADCINTENABLED //Not tested
   // Enable interrupts on data valid level
   IADC_enableInt(IADC0, IADC_IF_SINGLEFIFODVL);
 
@@ -431,37 +425,11 @@ void IADCHandler(void)
 					  }
 }
 
-void Test_GPIO()
-{
-    /* Enable GPIO clock */
-      CMU_ClockEnable(cmuClock_GPIO, true);
-
-      /* Configure Push Button 0 as input*/
-      GPIO_PinModeSet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN, gpioModeInput, 0);
-
-      /* Configure LED0 as a push pull for LED drive */
-      GPIO_PinModeSet(BSP_LED0_PORT, BSP_LED0_PIN, gpioModePushPull, 1);
-
-      while (1)
-      {
-        /* Check if button is pressed - when pressed, value will be 0 */
-        if (!GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN))
-        {
-          GPIO_PinOutSet(BSP_LED0_PORT, BSP_LED0_PIN);
-        }
-        else
-        {
-          GPIO_PinOutClear(BSP_LED0_PORT, BSP_LED0_PIN);
-        }
-      }
-}
-
-
 
 void InitPeripherals()
 {
 
-#if 1
+
 	  // Initialize the IADC
 	    initIADC();
 	    // Start single
@@ -474,15 +442,6 @@ void InitPeripherals()
 	    UpdatePWM1(50);
 	    ChangePWMoutput();
 	    printLog("PWM at 50%%\n\r");
-
-
-
-	//    while(1);
-
-#else
-
-	    Test_GPIO();
-#endif
 
 }
 
