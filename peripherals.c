@@ -182,14 +182,14 @@ void InitPWM1()
 
   // Enable clock to GPIO and TIMER0
 
-  CMU_ClockEnable(cmuClock_TIMER1, true);
+  CMU_ClockEnable(cmuClock_TIMER3, true);
 
 
-// $[TIMER1 I/O setup]
+// $[TIMER3 I/O setup]
 /* Set up CC0 */
-  // Route TIMER1 CC0 output to PA6
-  GPIO->TIMERROUTE[1].ROUTEEN  = GPIO_TIMER_ROUTEEN_CC0PEN;
-  GPIO->TIMERROUTE[1].CC0ROUTE = (PWM_PORT << _GPIO_TIMER_CC0ROUTE_PORT_SHIFT)
+  // Route TIMER3 CC0 output to PA6
+  GPIO->TIMERROUTE[3].ROUTEEN  = GPIO_TIMER_ROUTEEN_CC0PEN;
+  GPIO->TIMERROUTE[3].CC0ROUTE = (PWM_PORT << _GPIO_TIMER_CC0ROUTE_PORT_SHIFT)
 					| (PWM_PIN << _GPIO_TIMER_CC0ROUTE_PIN_SHIFT);
 
 	TIMER_Init_TypeDef init = TIMER_INIT_DEFAULT;
@@ -207,10 +207,10 @@ void InitPWM1()
 	init.oneShot = 0;
 	init.count2x = 0;
 	init.ati = 0;
-	TIMER_Init(TIMER1, &init);
-	// [TIMER1 initialization]$
+	TIMER_Init(TIMER3, &init);
+	// [TIMER3 initialization]$
 
-	// $[TIMER1 CC0 init]
+	// $[TIMER3 CC0 init]
 	TIMER_InitCC_TypeDef initCC0 = TIMER_INITCC_DEFAULT;
 
 	initCC0.prsInput = false;
@@ -224,8 +224,8 @@ void InitPWM1()
 	initCC0.cmoa = timerOutputActionNone;
 	initCC0.coist = 0;
 	initCC0.outInvert = 0;
-	TIMER_InitCC(TIMER1, 0, &initCC0);
-	// [TIMER1 CC0 init]$0
+	TIMER_InitCC(TIMER3, 0, &initCC0);
+	// [TIMER3 CC0 init]$0
 
 	PWMObj.all=0;
 	PWMObj.bits.Enabled=1;
@@ -258,17 +258,17 @@ void ChangePWMoutput() //desiredDutyCycle varies from 0-100;
 	if (desiredDutyCycle>100) CC1DutyCycle=99;
 
 
-	TIMER_Enable(TIMER1,0);	//Disables Timer
+	TIMER_Enable(TIMER3,0);	//Disables Timer
 
 	/* set PWM period */
-	TIMER_TopSet (TIMER1, PWMFrequency);
+	TIMER_TopSet (TIMER3, PWMFrequency);
 
 	/* Set PWM duty cycle to 50% */
-	TIMER_CompareSet (TIMER1, 0, CC1DutyCycle);
+	TIMER_CompareSet (TIMER3, 0, CC1DutyCycle);
 
 	CC1DutyCycle = CC1DutyCycle;
 
-	TIMER_Enable(TIMER1,1);
+	TIMER_Enable(TIMER3,1);
 
 }
 
