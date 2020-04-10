@@ -22,6 +22,7 @@
 #include "em_usart.h"
 #include "em_iadc.h"
 #include "em_ldma.h"
+#include "app.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -179,17 +180,17 @@ static uint8_t desiredDutyCycle;
 void InitPWM1()
 {
 
-		  // Enable clock to GPIO and TIMER0
+  // Enable clock to GPIO and TIMER0
 
-		  CMU_ClockEnable(cmuClock_TIMER1, true);
+  CMU_ClockEnable(cmuClock_TIMER1, true);
 
 
-	// $[TIMER1 I/O setup]
-	/* Set up CC0 */
-		  // Route TIMER1 CC0 output to PA6
-		  GPIO->TIMERROUTE[1].ROUTEEN  = GPIO_TIMER_ROUTEEN_CC0PEN;
-		  GPIO->TIMERROUTE[1].CC0ROUTE = (PWM_PORT << _GPIO_TIMER_CC0ROUTE_PORT_SHIFT)
-		                    | (PWM_PIN << _GPIO_TIMER_CC0ROUTE_PIN_SHIFT);
+// $[TIMER1 I/O setup]
+/* Set up CC0 */
+  // Route TIMER1 CC0 output to PA6
+  GPIO->TIMERROUTE[1].ROUTEEN  = GPIO_TIMER_ROUTEEN_CC0PEN;
+  GPIO->TIMERROUTE[1].CC0ROUTE = (PWM_PORT << _GPIO_TIMER_CC0ROUTE_PORT_SHIFT)
+					| (PWM_PIN << _GPIO_TIMER_CC0ROUTE_PIN_SHIFT);
 
 	TIMER_Init_TypeDef init = TIMER_INIT_DEFAULT;
 
@@ -225,10 +226,6 @@ void InitPWM1()
 	initCC0.outInvert = 0;
 	TIMER_InitCC(TIMER1, 0, &initCC0);
 	// [TIMER1 CC0 init]$0
-
-	//PWM Output - PIN P7 on WSTK
-
-	GPIO_PinModeSet(PWM_PORT, PWM_PIN, gpioModePushPull, 0);
 
 	PWMObj.all=0;
 	PWMObj.bits.Enabled=1;
@@ -392,6 +389,8 @@ void softIADC_IRQHandler(void)
 
 }
 
+
+
 void ADCSampleReady()
 {
 	ADCObj.bits.ADCSample=1;
@@ -406,8 +405,19 @@ uint16_t GetADC0()
 {
 	ADCObj.bits.ADCSample=0;
 
-	ADCresult = IADC_pullSingleFifoResult(IADC0);
 	return ADCresult.data;
+}
+
+void IADCHandler(void)
+{
+
+	 StartADC0Sample();
+
+					  if((IADC0->STATUS & (_IADC_STATUS_CONVERTING_MASK | _IADC_STATUS_SINGLEFIFODV_MASK)) == IADC_STATUS_SINGLEFIFODV)
+					  {
+						  ADCresult = IADC_pullSingleFifoResult(IADC0);
+						  ADCSampleReady();
+					  }
 }
 
 void Test_GPIO()
@@ -442,16 +452,19 @@ void InitPeripherals()
 
 #if 1
 	  // Initialize the IADC
-	    initIADC();
+	  //  initIADC();
 	    // Start single
-	    StartADC0Sample();
+	 //   StartADC0Sample();
 
+	printLog("InitGPIO\n\r");
 		InitGPIO();
+	printLog("InitPWM\n\r");
 	    InitPWM1();
-	    UpdatePWM1(70);
+	    UpdatePWM1(50);
 	    ChangePWMoutput();
-	    /* Enable GPIO clock */
+	    printLog("PWM at 50%%\n\r");
 
+	    while(1);
 
 #else
 

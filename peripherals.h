@@ -197,6 +197,7 @@ void StartADC0Sample();
 uint16_t GetADC0();
 void softIADC_IRQHandler(void);
 void ADCSampleReady();
+void IADCHandler(void);
 
 void InitPeripherals();
 

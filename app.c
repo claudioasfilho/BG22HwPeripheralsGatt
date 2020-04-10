@@ -103,24 +103,12 @@ void appMain(gecko_configuration_t *pconfig)
 			  {
 				  static int local_time = 0;
 
-
-				  StartADC0Sample();
-
-				  if((IADC0->STATUS & (_IADC_STATUS_CONVERTING_MASK | _IADC_STATUS_SINGLEFIFODV_MASK)) == IADC_STATUS_SINGLEFIFODV)
-				  {
-					  ADCSampleReady();
-				  }
-				  uint8_t temp;
-				      	  		  //temp = GetPB0();
-
-				      	  		if(GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN)==0) temp=1;
-				      	  		else temp=0;
-
-				  printLog("Softtimer %ds Pb0 = %d Pb1 = %d\r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN), GPIO_PinInGet(BSP_BUTTON1_PORT, BSP_BUTTON1_PIN));
-				  //GPIO_PinOutToggle(BSP_LED0_PORT, BSP_LED0_PIN);
+				  IADCHandler();
 				  PWMHandler();
 				  GPIOHandler();
-				  //StartADC0Sample();
+				  printLog("Softtimer %ds Pb0 = %d Pb1 = %d ADC = %d \r\n", local_time++, GPIO_PinInGet(BSP_BUTTON0_PORT, BSP_BUTTON0_PIN), GPIO_PinInGet(BSP_BUTTON1_PORT, BSP_BUTTON1_PIN), GetADC0());
+
+
 			  }
 
 

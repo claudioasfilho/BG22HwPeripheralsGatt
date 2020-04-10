@@ -81,6 +81,9 @@ peripherals.o: ../peripherals.c \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_usart.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_ldma.h \
+ ../app.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h \
  ../hal-config.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h
@@ -248,6 +251,12 @@ peripherals.o: ../peripherals.c \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_iadc.h:
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emlib/inc/em_ldma.h:
+
+../app.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h:
 
 ../hal-config.h:
 
