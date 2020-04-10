@@ -84,6 +84,7 @@ peripherals.o: ../peripherals.c \
  ../app.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h \
+ /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emdrv/sleep/inc/sleep.h \
  ../hal-config.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/bsphalconfig.h \
  /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/bsp/bsp_bcp.h
@@ -257,6 +258,8 @@ peripherals.o: ../peripherals.c \
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/drivers/retargetserial.h:
 
 /Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/hardware/kit/common/halconfig/retargetserialhalconfig.h:
+
+/Users/clfilho/SimplicityStudio/March20/BG22HwPeripheralsGatt/platform/emdrv/sleep/inc/sleep.h:
 
 ../hal-config.h:
 

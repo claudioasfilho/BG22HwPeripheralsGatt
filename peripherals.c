@@ -23,6 +23,7 @@
 #include "em_iadc.h"
 #include "em_ldma.h"
 #include "app.h"
+#include "sleep.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -236,6 +237,16 @@ void InitPWM1()
 void UpdatePWM1(uint8_t DutyCycle) //desiredDutyCycle varies from 0-100;
 {
 	desiredDutyCycle = DutyCycle;
+
+	if (DutyCycle == 0)
+	{
+		SLEEP_SleepBlockEnd(sleepEM2);
+	}
+	else
+	{
+		SLEEP_SleepBlockBegin(sleepEM2);
+	}
+
 	PWMObj.bits.Status=1;
 }
 
@@ -452,9 +463,9 @@ void InitPeripherals()
 
 #if 1
 	  // Initialize the IADC
-	  //  initIADC();
+	    initIADC();
 	    // Start single
-	 //   StartADC0Sample();
+	    StartADC0Sample();
 
 	printLog("InitGPIO\n\r");
 		InitGPIO();
@@ -464,7 +475,9 @@ void InitPeripherals()
 	    ChangePWMoutput();
 	    printLog("PWM at 50%%\n\r");
 
-	    while(1);
+
+
+	//    while(1);
 
 #else
 
